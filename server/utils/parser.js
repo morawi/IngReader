@@ -1,6 +1,7 @@
 const { Configuration, OpenAIApi } = require("openai");
+var fs = require("fs");
 
-async function parseText(text) {
+export default async function parser(text) {
   const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
   });
@@ -20,5 +21,3 @@ async function parseText(text) {
 
   return response.data.choices[0].text;
 }
-
-exports.parseText = parseText;
