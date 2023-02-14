@@ -1,3 +1,3 @@
-import matcher from "../utils/matcher";
+import matcher from "../utils/matcher.js";
 
-matcher(["corn", "niacian"])
+console.log(matcher(["corn starch", "niacian"]));

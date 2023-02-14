@@ -1,10 +1,8 @@
-const Fuse = require("fuse.js");
+import Fuse from 'fuse.js';
+import { readFileSync } from 'fs';
 
-const fs = require('fs');
-
-let rawdata = fs.readFileSync('../static/ingredients.json');
+let rawdata = readFileSync('../static/ingredients.json');
 let data = JSON.parse(rawdata);
-console.log(data);
 
 export default function matcher(inputs) {
     const options = {
