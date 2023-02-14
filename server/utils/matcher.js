@@ -1,5 +1,11 @@
 const Fuse = require("fuse.js");
 
+const fs = require('fs');
+
+let rawdata = fs.readFileSync('../static/ingredients.json');
+let data = JSON.parse(rawdata);
+console.log(data);
+
 export default function matcher(inputs) {
     const options = {
       includeScore: true,
