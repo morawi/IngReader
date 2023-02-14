@@ -4,7 +4,7 @@ export default function matcher(inputs) {
     const options = {
       includeScore: true,
       threshold: 0.1,
-      keys: ["name.*"],
+      keys: ["name"],
     };
   
     const fuse = new Fuse(data, options);
