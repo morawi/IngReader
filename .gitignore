@@ -63,3 +63,5 @@ buck-out/
 .expo/*
 web-build/
 
+# ignores the server to avoid merge issues
+server/
