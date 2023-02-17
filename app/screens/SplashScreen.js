@@ -1,12 +1,20 @@
 import * as React from "react";
+import { useEffect } from 'react';
 import { Text, StyleSheet, View } from "react-native";
 import { FontSize, FontFamily, Color } from "../GlobalStyles";
 
-const SplashScreen = () => {
+const SplashScreen = ({ navigation }) => {
+  useEffect(() => {
+    setTimeout(() => {
+      navigation.replace('HomeScreen'); // replace splash screen with Home screen after 3 seconds
+    }, 3000);
+  }, []);
+
   return (
     <View style={styles.splashscreen}>
       <Text style={styles.splashScreen}>Splash Screen</Text>
     </View>
+    
   );
 };
 

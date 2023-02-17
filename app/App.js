@@ -26,17 +26,15 @@ const App = () => {
     <>
       <NavigationContainer>
         {hideSplashScreen ? (
-          <Stack.Navigator screenOptions={{ headerShown: false }}>
-            {/* <Stack.Screen
-              name="SplashScreen"
-              component={SplashScreen}
-              options={{ headerShown: false }}
-            /> */}
-            <Stack.Screen
-              name="HomeScreen"
-              component={HomeScreen}
-              options={{ headerShown: false }}
-            />
+          <Stack.Navigator initialRouteName="Splash">
+            <Stack.Screen 
+              name="SplashScreen" 
+              component={SplashScreen} 
+              options={{ headerShown: false }} />
+            <Stack.Screen 
+              name="HomeScreen" 
+              component={HomeScreen} 
+              options={{ title: 'HomeScreen',  headerShown: false  }} />
             <Stack.Screen
               name="LoadingScreen"
               component={LoadingScreen}
