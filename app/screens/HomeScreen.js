@@ -2,17 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Text, View, TouchableOpacity, Linking, Platform } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 
-export default function HomeScreen() {
+export default function CameraScreen({ navigation }) {
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
-  const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
 
   useEffect(() => {
     (async () => {
-      const cameraStatus = await ImagePicker.requestCameraPermissionsAsync();
-      setHasCameraPermission(cameraStatus.status === 'granted');
-
-      const galleryStatus = await ImagePicker.requestMediaLibraryPermissionsAsync();
-      setHasGalleryPermission(galleryStatus.status === 'granted');
+      const { status } = await ImagePicker.requestCameraPermissionsAsync();
+      setHasCameraPermission(status === 'granted');
     })();
   }, []);
 
@@ -28,11 +24,9 @@ export default function HomeScreen() {
   };
 
   const handleGalleryButtonPress = async () => {
-    if (hasGalleryPermission === null) {
-      return;
-    }
-    if (hasGalleryPermission === false) {
-      alert('No access to gallery');
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (status !== 'granted') {
+      alert('No access to media library');
       return;
     }
     await ImagePicker.launchImageLibraryAsync();
@@ -48,13 +42,13 @@ export default function HomeScreen() {
           backgroundColor: 'blue',
           justifyContent: 'center',
           alignItems: 'center',
-          marginBottom: 20,
         }}
         onPress={handleCameraButtonPress}>
         <Text style={{ fontSize: 18, color: 'white' }}>Open Camera</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={{
+          marginTop: 10,
           width: 200,
           height: 50,
           borderRadius: 10,
@@ -65,6 +59,22 @@ export default function HomeScreen() {
         onPress={handleGalleryButtonPress}>
         <Text style={{ fontSize: 18, color: 'white' }}>Open Gallery</Text>
       </TouchableOpacity>
+      <View
+        style={{
+          position: 'absolute',
+          bottom: 20,
+          flexDirection: 'row',
+          width: '100%',
+          justifyContent: 'space-between',
+          paddingHorizontal: 20,
+        }}>
+        <TouchableOpacity onPress={() => navigation.navigate('HomeScreen')}>
+          <Text style={{ fontSize: 18, color: 'blue' }}>Home</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('IngredientsList')}>
+          <Text style={{ fontSize: 18, color: 'blue' }}>Ingredients</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
