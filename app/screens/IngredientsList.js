@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     left: 65,
     fontSize: FontSize.size_base,
     fontFamily: FontFamily.aBeeZeeRegular,
-    color: Color.white,
+    color: Color.black,
     textAlign: "left",
   },
   ingredientslist: {
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   ingredientsListItemName: {
     fontSize: FontSize.size_base,
     fontFamily: FontFamily.aBeeZeeRegular,
-    color: Color.white,
+    color: Color.black,
   },
 });
 
