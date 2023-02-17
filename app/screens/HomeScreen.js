@@ -4,11 +4,15 @@ import * as ImagePicker from 'expo-image-picker';
 
 export default function HomeScreen() {
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
+  const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
 
   useEffect(() => {
     (async () => {
-      const { status } = await ImagePicker.requestCameraPermissionsAsync();
-      setHasCameraPermission(status === 'granted');
+      const cameraStatus = await ImagePicker.requestCameraPermissionsAsync();
+      setHasCameraPermission(cameraStatus.status === 'granted');
+
+      const galleryStatus = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      setHasGalleryPermission(galleryStatus.status === 'granted');
     })();
   }, []);
 
@@ -23,6 +27,17 @@ export default function HomeScreen() {
     await ImagePicker.launchCameraAsync();
   };
 
+  const handleGalleryButtonPress = async () => {
+    if (hasGalleryPermission === null) {
+      return;
+    }
+    if (hasGalleryPermission === false) {
+      alert('No access to gallery');
+      return;
+    }
+    await ImagePicker.launchImageLibraryAsync();
+  };
+
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <TouchableOpacity
@@ -33,9 +48,22 @@ export default function HomeScreen() {
           backgroundColor: 'blue',
           justifyContent: 'center',
           alignItems: 'center',
+          marginBottom: 20,
         }}
         onPress={handleCameraButtonPress}>
         <Text style={{ fontSize: 18, color: 'white' }}>Open Camera</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={{
+          width: 200,
+          height: 50,
+          borderRadius: 10,
+          backgroundColor: 'blue',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+        onPress={handleGalleryButtonPress}>
+        <Text style={{ fontSize: 18, color: 'white' }}>Open Gallery</Text>
       </TouchableOpacity>
     </View>
   );
