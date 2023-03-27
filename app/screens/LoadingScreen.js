@@ -5,7 +5,7 @@ import { FontSize, FontFamily } from "../GlobalStyles";
 const LoadingScreen = () => {
   return (
     <View style={styles.loadingscreen}>
-      <Text style={styles.loadingScreen}>Loading Screen</Text>
+      <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYjAxYjZlZDI4ZGU4YzFlYTQ3NDE5YWZlOWYxZTA1NTYyNDViMjI4ZiZjdD1n/294BQwZ83ocMRGBdP3/giphy.gif" alt="React Image" style={{ alignSelf: 'center' }} />
     </View>
   );
 };
