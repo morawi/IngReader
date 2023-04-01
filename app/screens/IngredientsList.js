@@ -101,6 +101,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#E8EAED',
   },
   ingredientTitleWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     paddingTop: 50,
     paddingBottom: 20,
     paddingHorizontal: 20,
@@ -186,9 +188,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: 20,
   },
-  paginationButton: {
+    paginationButton: {
     backgroundColor: 'white',
     borderRadius: 25,
     height: 25,
