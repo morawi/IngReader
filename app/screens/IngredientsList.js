@@ -83,11 +83,10 @@ const IngredientsList = () => {
         />
         {searchText ? (
           <TouchableOpacity onPress={handleClearSearch} style={styles.clearSearchInput}>
-            <Feather name="x" size={24} color="black"/>
+            <Feather name="x" size={24} color="black" style={{ marginLeft: 1 }} />
           </TouchableOpacity>
         ) : null}
       </View>
-
 
     </View>
 
@@ -169,6 +168,8 @@ const styles = StyleSheet.create({
     width: 40,
     borderColor: '#ccc',
     borderWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   searchButton: {
     backgroundColor: 'blue',
