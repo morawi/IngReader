@@ -28,13 +28,13 @@ const IngredientsList = () => {
       setCurrentPage(currentPage - 1);
     }
   };
-
+  
   const handleNextPage = () => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
     }
   };
-
+  
   const handleSearchTextChange = (text) => {
     setSearchText(text);
     setCurrentPage(1);
@@ -51,13 +51,13 @@ const IngredientsList = () => {
       <View style={styles.ingredientTitleWrapper}>
         <Text style={styles.sectionTitle}>All Ingredients</Text>
         <View style={styles.paginationContainer}>
-            <TouchableOpacity onPress={handlePreviousPage} style={styles.paginationButton}>
-              <Text style={currentPage > 1 ? styles.pageButtonText : styles.disabledPageButtonText}>{'<'}</Text>
-            </TouchableOpacity>
-            <Text style={styles.paginationText}>{currentPage} / {totalPages}</Text>
-            <TouchableOpacity onPress={handleNextPage} style={styles.paginationButton}>
-              <Text style={currentPage < totalPages ? styles.pageButtonText : styles.disabledPageButtonText}>{'>'}</Text>
-            </TouchableOpacity>
+          <TouchableOpacity onPress={handlePreviousPage} style={currentPage > 1 ? styles.paginationButton : styles.disabledPaginationButton}>
+            <Text style={currentPage > 1 ? styles.pageButtonText : styles.disabledPageButtonText}>{'<'}</Text>
+          </TouchableOpacity>
+          <Text style={styles.paginationText}>{currentPage} / {totalPages}</Text>
+          <TouchableOpacity onPress={handleNextPage} style={currentPage < totalPages ? styles.paginationButton : styles.disabledPaginationButton}>
+            <Text style={currentPage < totalPages ? styles.pageButtonText : styles.disabledPageButtonText}>{'>'}</Text>
+          </TouchableOpacity>
         </View>
       </View>
 
@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-    paginationButton: {
+  paginationButton: {
     backgroundColor: 'white',
     borderRadius: 25,
     height: 25,
@@ -199,7 +199,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginHorizontal: 5,
-  },  
-});
+  },
+  disabledPaginationButton: {
+    backgroundColor: '#ccc',
+    borderRadius: 25,
+    height: 25,
+    width: 25,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginHorizontal: 5,
+  },
+  });
 
 export default IngredientsList;
