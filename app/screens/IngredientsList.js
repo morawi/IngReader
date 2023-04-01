@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { KeyboardAvoidingView, Platform, StyleSheet, Text, View, TouchableOpacity, ScrollView, TextInput } from 'react-native';
+import { Feather } from '@expo/vector-icons';
 import SingleIngredient from "./SingleIngredient";
 
 const ingredientsListData = require('../static/ingredients.json');
@@ -7,7 +8,7 @@ const ingredientsListData = require('../static/ingredients.json');
 const PAGE_SIZE = 20;
 
 const IngredientsList = () => {
-  
+
   const [currentPage, setCurrentPage] = useState(1);
   const [searchText, setSearchText] = useState("");
 
@@ -36,6 +37,11 @@ const IngredientsList = () => {
 
   const handleSearchTextChange = (text) => {
     setSearchText(text);
+    setCurrentPage(1);
+  };
+
+  const handleClearSearch = () => {
+    setSearchText("");
     setCurrentPage(1);
   };
 
@@ -69,12 +75,17 @@ const IngredientsList = () => {
       
       
       <View style={styles.searchContainer}>
-          <TextInput
-            style={styles.searchInput}
-            placeholder="Search ingredients"
-            value={searchText}
-            onChangeText={handleSearchTextChange}
-          />
+        <TextInput
+          style={styles.searchInput}
+          placeholder="Search ingredients"
+          value={searchText}
+          onChangeText={handleSearchTextChange}
+        />
+        {searchText ? (
+          <TouchableOpacity onPress={handleClearSearch} style={styles.clearSearchInput}>
+            <Feather name="x" size={24} color="black"/>
+          </TouchableOpacity>
+        ) : null}
       </View>
 
 
@@ -91,7 +102,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#E8EAED',
   },
   ingredientTitleWrapper: {
-    paddingTop: 60,
+    paddingTop: 50,
     paddingBottom: 20,
     paddingHorizontal: 20,
   },
@@ -150,6 +161,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     paddingHorizontal: 10,
     marginRight: 10,
+  },
+  clearSearchInput: {
+    backgroundColor: 'white',
+    borderRadius: 25,
+    height: 40,
+    width: 40,
+    borderColor: '#ccc',
+    borderWidth: 1,
   },
   searchButton: {
     backgroundColor: 'blue',
