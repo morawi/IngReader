@@ -50,25 +50,25 @@ const IngredientsList = () => {
                   
       <View style={styles.ingredientTitleWrapper}>
         <Text style={styles.sectionTitle}>All Ingredients</Text>
+        <View style={styles.paginationContainer}>
+            <TouchableOpacity onPress={handlePreviousPage} style={styles.paginationButton}>
+              <Text style={currentPage > 1 ? styles.pageButtonText : styles.disabledPageButtonText}>{'<'}</Text>
+            </TouchableOpacity>
+            <Text style={styles.paginationText}>{currentPage} / {totalPages}</Text>
+            <TouchableOpacity onPress={handleNextPage} style={styles.paginationButton}>
+              <Text style={currentPage < totalPages ? styles.pageButtonText : styles.disabledPageButtonText}>{'>'}</Text>
+            </TouchableOpacity>
+        </View>
       </View>
 
       <ScrollView>
         <View style={styles.ingredientWrapper}>
-            <View style={styles.items}>
+          <View style={styles.items}>
             {ingredientsArray.map((item, index) => (
               <View key={index}>
                 <SingleIngredient item={item}></SingleIngredient>
               </View>
             ))}
-          </View>
-          <View style={{justifyContent: 'space-between', flexDirection: 'row', width: '50%'}}>
-            <TouchableOpacity onPress={handlePreviousPage}>
-              <Text style={currentPage > 1 ? styles.pageButton : styles.disabledPageButton}>{'<'}</Text>
-            </TouchableOpacity>
-            <Text>{currentPage} / {totalPages}</Text>
-            <TouchableOpacity onPress={handleNextPage}>
-              <Text style={currentPage < totalPages ? styles.pageButton : styles.disabledPageButton}>{'>'}</Text>
-            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
@@ -182,6 +182,23 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 18,
   },
+  paginationContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 20,
+  },
+  paginationButton: {
+    backgroundColor: 'white',
+    borderRadius: 25,
+    height: 25,
+    width: 25,
+    borderColor: '#ccc',
+    borderWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginHorizontal: 5,
+  },  
 });
 
 export default IngredientsList;
