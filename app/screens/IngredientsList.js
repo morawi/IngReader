@@ -1,16 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { KeyboardAvoidingView, Platform, StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import SingleIngredient from "./SingleIngredient";
 
 const ingredientsListData = require('../static/ingredients.json');
-// const filteredData = ingredientsListData.filter(item => item.name.en);
 
-
-// alert(ingredientsListData)
+const PAGE_SIZE = 100;
 
 const IngredientsList = () => {
   
-  const ingredientsArray = Object.values(ingredientsListData).filter(item => item.name.en).slice(0, 100);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const totalPages = Math.ceil(Object.values(ingredientsListData).filter(item => item.name.en).length / PAGE_SIZE);
+
+  const start = (currentPage - 1) * PAGE_SIZE;
+  const end = start + PAGE_SIZE;
+
+  const ingredientsArray = Object.values(ingredientsListData).filter(item => item.name.en).slice(start, end);
+
+  const handlePreviousPage = () => {
+    setCurrentPage(currentPage - 1);
+  };
+
+  const handleNextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
 
   return (
     <View style={styles.container}>
@@ -31,10 +44,21 @@ const IngredientsList = () => {
       <View style={styles.footerContainer}>
         <KeyboardAvoidingView behavior={Platform.os === 'ios' ? "padding" : "height"}  style={styles.footerContent}>
           <View>
-            <TouchableOpacity onPress={() => navigation.navigate('CameraScreen')}>
-              <Text style={{ fontSize: 18, color: 'blue' }}>Home</Text>
-            </TouchableOpacity>
-
+            {currentPage > 1 && 
+              <TouchableOpacity onPress={handlePreviousPage}>
+                <Text style={{ fontSize: 18, color: 'blue' }}>Previous</Text>
+              </TouchableOpacity>
+            }
+          </View>
+          <View>
+            <Text>{currentPage} / {totalPages}</Text>
+          </View>
+          <View>
+            {currentPage < totalPages && 
+              <TouchableOpacity onPress={handleNextPage}>
+                <Text style={{ fontSize: 18, color: 'blue' }}>Next</Text>
+              </TouchableOpacity>
+            }
           </View>
         </KeyboardAvoidingView>
       </View>
