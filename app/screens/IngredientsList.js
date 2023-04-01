@@ -46,7 +46,7 @@ const IngredientsList = () => {
           <View>
             {currentPage > 1 && 
               <TouchableOpacity onPress={handlePreviousPage}>
-                <Text style={{ fontSize: 18, color: 'blue' }}>Previous</Text>
+                <Text style={styles.button}>{"<"}</Text>
               </TouchableOpacity>
             }
           </View>
@@ -56,7 +56,7 @@ const IngredientsList = () => {
           <View>
             {currentPage < totalPages && 
               <TouchableOpacity onPress={handleNextPage}>
-                <Text style={{ fontSize: 18, color: 'blue' }}>Next</Text>
+                <Text style={styles.button}>{">"}</Text>
               </TouchableOpacity>
             }
           </View>
@@ -105,8 +105,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignContent: 'center',
+  },
+  button: {
+    fontSize: 18,
+    color: 'blue',
+    fontWeight: 'bold'
   }
-
 });
 
 export default IngredientsList;
