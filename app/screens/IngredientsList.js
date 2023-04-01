@@ -4,7 +4,7 @@ import SingleIngredient from "./SingleIngredient";
 
 const ingredientsListData = require('../static/ingredients.json');
 
-const PAGE_SIZE = 100;
+const PAGE_SIZE = 20;
 
 const IngredientsList = () => {
   
@@ -87,8 +87,8 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 40,
     width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    // flexDirection: 'row',
+    // justifyContent: 'center',
     alignContent: 'center',
   },
   footerContent:{
@@ -96,7 +96,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     position: "absolute",
     paddingBottom: 20,
-    // paddingTop: 40,
+    justifyContent: 'center',
+
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
