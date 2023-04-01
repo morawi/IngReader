@@ -142,11 +142,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   searchInput: {
+    backgroundColor: 'white',
+    borderRadius: 25,
     flex: 1,
     height: 40,
     borderColor: '#ccc',
     borderWidth: 1,
-    borderRadius: 5,
     paddingHorizontal: 10,
     marginRight: 10,
   },
