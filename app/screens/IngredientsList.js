@@ -41,17 +41,13 @@ const IngredientsList = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.searchContainer}>
-        <TextInput
-          style={styles.searchInput}
-          placeholder="Search ingredients"
-          value={searchText}
-          onChangeText={handleSearchTextChange}
-        />
+                  
+      <View style={styles.ingredientTitleWrapper}>
+        <Text style={styles.sectionTitle}>All Ingredients</Text>
       </View>
+
       <ScrollView>
         <View style={styles.ingredientWrapper}>
-            <Text style={styles.sectionTitle}>All Ingredients</Text>
             <View style={styles.items}>
             {ingredientsArray.map((item, index) => (
               <View key={index}>
@@ -69,8 +65,18 @@ const IngredientsList = () => {
             </TouchableOpacity>
           </View>
         </View>
-
       </ScrollView>
+      
+      
+      <View style={styles.searchContainer}>
+          <TextInput
+            style={styles.searchInput}
+            placeholder="Search ingredients"
+            value={searchText}
+            onChangeText={handleSearchTextChange}
+          />
+      </View>
+
 
     </View>
 
@@ -84,8 +90,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#E8EAED',
   },
-  ingredientWrapper: {
+  ingredientTitleWrapper: {
     paddingTop: 60,
+    paddingBottom: 20,
+    paddingHorizontal: 20,
+  },
+  ingredientWrapper: {
+    paddingTop: 0,
     paddingHorizontal: 20,
   },
   sectionTitle: {
@@ -93,7 +104,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   items: {
-    marginVertical: 30,
+    // marginVertical: 30,
   },
   footerContainer:{
     position: "absolute",
