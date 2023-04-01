@@ -18,11 +18,15 @@ const IngredientsList = () => {
   const ingredientsArray = Object.values(ingredientsListData).filter(item => item.name.en).slice(start, end);
 
   const handlePreviousPage = () => {
-    setCurrentPage(currentPage - 1);
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
   };
 
   const handleNextPage = () => {
-    setCurrentPage(currentPage + 1);
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
   };
 
   return (
@@ -43,22 +47,14 @@ const IngredientsList = () => {
 
       <View style={styles.footerContainer}>
         <KeyboardAvoidingView behavior={Platform.os === 'ios' ? "padding" : "height"}  style={styles.footerContent}>
-          <View>
-            {currentPage > 1 && 
-              <TouchableOpacity onPress={handlePreviousPage}>
-                <Text style={styles.button}>{"<"}</Text>
-              </TouchableOpacity>
-            }
-          </View>
-          <View>
+          <View style={{justifyContent: 'space-between', flexDirection: 'row', width: '50%'}}>
+            <TouchableOpacity onPress={handlePreviousPage}>
+              <Text style={currentPage > 1 ? styles.pageButton : styles.disabledPageButton}>{'<'}</Text>
+            </TouchableOpacity>
             <Text>{currentPage} / {totalPages}</Text>
-          </View>
-          <View>
-            {currentPage < totalPages && 
-              <TouchableOpacity onPress={handleNextPage}>
-                <Text style={styles.button}>{">"}</Text>
-              </TouchableOpacity>
-            }
+            <TouchableOpacity onPress={handleNextPage}>
+              <Text style={currentPage < totalPages ? styles.pageButton : styles.disabledPageButton}>{'>'}</Text>
+            </TouchableOpacity>
           </View>
         </KeyboardAvoidingView>
       </View>
@@ -106,11 +102,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignContent: 'center',
   },
-  button: {
+  pageButton: {
     fontSize: 18,
     color: 'blue',
-    fontWeight: 'bold'
-  }
+  },
+  disabledPageButton: {
+    fontSize: 18,
+    color: 'gray',
+  },
 });
 
 export default IngredientsList;
