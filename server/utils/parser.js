@@ -9,7 +9,7 @@ export default async function parser(text) {
     }
   
     // calculate the end index of the ingredients list based on the first dot
-    const endIndex = text.indexOf(".", startIndex);
+    let endIndex = text.indexOf(".", startIndex);
     if (endIndex === -1) {
       endIndex = text.length; // Make endIndex the length of the string if there is no '.' found after 'Ingredients:'
     }
