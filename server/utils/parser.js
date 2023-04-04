@@ -15,13 +15,13 @@ export default async function parser(text) {
     }
   
     // extract the ingredients substring and remove unnecessary characters
-    ingredientsString = text.substring(startIndex + "ingredients:".length, endIndex);
-    cleanedIngredientsString = ingredientsString.replace(/\n/g, "").replace(/\r/g, "").trim();
+    let ingredientsString = text.substring(startIndex + "ingredients:".length, endIndex);
+    let cleanedIngredientsString = ingredientsString.replace(/\n/g, "").replace(/\r/g, "").trim();
     // remove any hyphens from ingredient names
     cleanedIngredientsString = cleanedIngredientsString.replace(/([a-z])-([a-z])/g, "$1$2");
   
     // split the cleaned ingredients string into an array of ingredients
-    let ingredients = cleanedIngredientsString.split(/,|(|)|[|]/);
+    let ingredients = cleanedIngredientsString.split(/,|\(|\)|\[|\]/);
     ingredients = ingredients.map(ingredient => ingredient.trim()).filter(ingredient => ingredient !== "" && isNaN(ingredient));
   
     // capitalize the first letter of each word in the ingredients array
