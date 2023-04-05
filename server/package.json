@@ -8,5 +8,10 @@
   },
   "author": "",
   "type": "module",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "fs": "^0.0.1-security",
+    "openai": "^3.2.1"
+  }
 }

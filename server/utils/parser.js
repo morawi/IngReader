@@ -1,35 +1,26 @@
-export default async function parser(text) {
-    // convert the input text to lowercase
-    text = text.toLowerCase();
+import { Configuration, OpenAIApi } from "openai";
+import dotenv from 'dotenv';
+import fs from 'fs';
 
-    // find the start index of the ingredients list
-    const startIndex = text.indexOf("ingredients:");
-    if (startIndex === -1) {
-      return []; // return empty array if "ingredients:" not found
-    }
+export default async function parser(text) {
+  dotenv.config();
+
+  const configuration = new Configuration({
+    apiKey: process.env.OPENAI_API_KEY,
+  });
+  const openai = new OpenAIApi(configuration);
+
+  const prompt = fs.readFileSync("./static/prompt.txt", "utf8");
   
-    // calculate the end index of the ingredients list based on the first dot
-    let endIndex = text.indexOf(".", startIndex);
-    if (endIndex === -1) {
-      endIndex = text.length; // Make endIndex the length of the string if there is no '.' found after 'Ingredients:'
-    }
-  
-    // extract the ingredients substring and remove unnecessary characters
-    let ingredientsString = text.substring(startIndex + "ingredients:".length, endIndex);
-    let cleanedIngredientsString = ingredientsString.replace(/\n/g, "").replace(/\r/g, "").trim();
-    // remove any hyphens from ingredient names
-    cleanedIngredientsString = cleanedIngredientsString.replace(/([a-z])-([a-z])/g, "$1$2");
-  
-    // split the cleaned ingredients string into an array of ingredients
-    let ingredients = cleanedIngredientsString.split(/,|\(|\)|\[|\]/);
-    ingredients = ingredients.map(ingredient => ingredient.trim()).filter(ingredient => ingredient !== "" && isNaN(ingredient));
-  
-    // capitalize the first letter of each word in the ingredients array
-    const capitalizedIngredients = ingredients.map(ingredient => {
-        const words = ingredient.trim().split(" ");
-        const capitalizedWords = words.map(word => word.charAt(0).toUpperCase() + word.slice(1));
-        return capitalizedWords.join(" ");
-      });
-  
-    return capitalizedIngredients;
+  const response = await openai.createCompletion({
+    model: "text-davinci-003",
+    prompt: prompt + text + `\n\nIngredients 3: `,
+    temperature: 0.7,
+    max_tokens: 512,
+    top_p: 1,
+    frequency_penalty: 0,
+    presence_penalty: 0,
+  });
+
+  return response.data.choices[0].text;
 }
