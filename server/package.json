@@ -1,0 +1,16 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "type": "module",
+  "dependencies": {
+    "@google-cloud/vision": "^3.1.1",
+    "google-gax": "^3.5.7",
+    "fuse.js": "^6.6.2"
+  }
+}

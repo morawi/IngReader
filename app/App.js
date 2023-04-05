@@ -1,15 +1,59 @@
-import { View, Text } from "react-native";
+const Stack = createNativeStackNavigator();
+import * as React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { useFonts } from "expo-font";
+import IngredientsList from "./screens/IngredientsList";
+import ResultsScreen from "./screens/ResultsScreen";
+import LoadingScreen from "./screens/LoadingScreen";
+import HomeScreen from "./screens/HomeScreen";
+import SplashScreen from "./screens/SplashScreen";
 
-export default function App() {
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { View, Text, Pressable, TouchableOpacity } from "react-native";
+
+const App = () => {
+  const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
+  const [fontsLoaded, error] = useFonts({
+    ABeeZee: require("./assets/fonts/ABeeZee.ttf"),
+    ABeeZee_regular: require("./assets/fonts/ABeeZee_regular.ttf"),
+  });
+
+  if (!fontsLoaded && !error) {
+    return null;
+  }
+
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Universal React with Expo</Text>
-    </View>
+    <>
+      <NavigationContainer>
+        {hideSplashScreen ? (
+          <Stack.Navigator initialRouteName="Splash">
+            <Stack.Screen 
+              name="SplashScreen" 
+              component={SplashScreen} 
+              options={{ headerShown: false }} />
+            <Stack.Screen 
+              name="HomeScreen" 
+              component={HomeScreen} 
+              options={{ title: 'HomeScreen',  headerShown: false  }} />
+            <Stack.Screen
+              name="LoadingScreen"
+              component={LoadingScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="ResultsScreen"
+              component={ResultsScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="IngredientsList"
+              component={IngredientsList}
+              options={{ headerShown: false }}
+            />
+          </Stack.Navigator>
+        ) : null}
+      </NavigationContainer>
+    </>
   );
-}
+};
+export default App;
