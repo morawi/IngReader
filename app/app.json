@@ -10,6 +10,11 @@
     ],
     "android": {
       "package": "com.golecl.blank"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "eec3510e-d047-48b9-a6cd-351e2a133092"
+      }
     }
   }
 }
