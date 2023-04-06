@@ -4,33 +4,62 @@ import * as ImagePicker from 'expo-image-picker';
 import { FontSize, FontFamily, Color } from "../GlobalStyles";
 
 export default function CameraScreen({ navigation }) {
-  const [hasCameraPermission, setHasCameraPermission] = useState(null);
+  const handleGalleryButtonPress = async () => {
+    if (Platform.OS !== "web") {
+      const {
+        status,
+      } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (status !== "granted") {
+        alert("Sorry, we need camera roll permissions to make this work!");
+      }
+    }
 
-  useEffect(() => {
-    (async () => {
-      const { status } = await ImagePicker.requestCameraPermissionsAsync();
-      setHasCameraPermission(status === 'granted');
-    })();
-  }, []);
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    }).catch((error) => {});;
 
-  const handleCameraButtonPress = async () => {
-    if (hasCameraPermission === null) {
+
+    if (result.canceled) {
       return;
     }
-    if (hasCameraPermission === false) {
-      alert('No access to camera');
-      return;
-    }
-    await ImagePicker.launchCameraAsync();
+
+    processImage(result.assets[0].uri);
   };
 
-  const handleGalleryButtonPress = async () => {
-    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (status !== 'granted') {
-      alert('No access to media library');
+  const handleCameraButtonPress = async () => {
+    if (Platform.OS !== "web") {
+      const {
+        status,
+      } = await ImagePicker.requestCameraPermissionsAsync();
+      if (status !== "granted") {
+        alert("Sorry, we need camera roll permissions to make this work!");
+      }
+    }
+
+
+    let result = await ImagePicker.launchCameraAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    }).catch((error) => {
+      console.log(error);
+    })
+
+    if (result.canceled) {
       return;
     }
-    await ImagePicker.launchImageLibraryAsync();
+
+    processImage(result.assets[0].uri);
+  };
+
+  const processImage = (image) => {
+    if (image) {
+      navigation.navigate("LoadingScreen", { image: image });
+    }
   };
 
   const styles = StyleSheet.create({

@@ -3,7 +3,10 @@ import { Text, View, TouchableOpacity, Linking, Platform, StyleSheet, Image } fr
 
 
 
-const LoadingScreen = () => {
+const LoadingScreen = (props) => {
+
+  console.log("loading screen", props.route.params.image);
+
   return (
   
   
