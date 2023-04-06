@@ -1,7 +1,8 @@
 import Fuse from "fuse.js";
-import { readFileSync } from "fs";
+import fs from "fs";
 
-let rawdata = readFileSync("../static/ingredients.json");
+let rawdata = fs.readFileSync("./static/ingredients.json", "utf8");
+
 let data = JSON.parse(rawdata);
 let processedData = Object.keys(data).map((key) => data[key]);
 

@@ -1,5 +1,5 @@
-const { Configuration, OpenAIApi } = require("openai");
-var fs = require("fs");
+import { Configuration, OpenAIApi } from "openai";
+import fs from "fs";
 
 export default async function parser(text) {
   const configuration = new Configuration({
@@ -7,7 +7,7 @@ export default async function parser(text) {
   });
   const openai = new OpenAIApi(configuration);
 
-  const prompt = fs.readFileSync("./prompt.txt", "utf8");
+  const prompt = fs.readFileSync("./static/prompt.txt", "utf8");
 
   const response = await openai.createCompletion({
     model: "text-davinci-003",
