@@ -3,12 +3,12 @@ import * as React from "react";
 import { NavigationContainer } from "../node_modules/@react-navigation/native";
 import { useFonts } from "expo-font";
 import IngredientsList from "./screens/IngredientsList";
-import ResultsScreen from "./screens/ResultsScreen";
+
 import LoadingScreen from "./screens/LoadingScreen";
 import HomeScreen from "./screens/HomeScreen";
 import SplashScreen from "./screens/SplashScreen";
 
-import { createNativeStackNavigator } from "../node_modules/@react-navigation/native-stack";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { View, Text, Pressable, TouchableOpacity } from "react-native";
 
 const App = () => {
@@ -26,11 +26,7 @@ const App = () => {
     <>
       <NavigationContainer>
         {hideSplashScreen ? (
-          <Stack.Navigator initialRouteName="Splash">
-            <Stack.Screen 
-              name="SplashScreen" 
-              component={SplashScreen} 
-              options={{ headerShown: false }} />
+          <Stack.Navigator initialRouteName="HomeScreen">
             <Stack.Screen 
               name="HomeScreen" 
               component={HomeScreen} 
@@ -40,11 +36,7 @@ const App = () => {
               component={LoadingScreen}
               options={{ headerShown: false }}
             />
-            <Stack.Screen
-              name="ResultsScreen"
-              component={ResultsScreen}
-              options={{ headerShown: false }}
-            />
+
             <Stack.Screen
               name="IngredientsList"
               component={IngredientsList}
