@@ -1,11 +1,8 @@
 import React, {useEffect} from 'react';
-import {ImageBackground ,View, SafeAreaView, StyleSheet, Text,ScrollView,TouchableOpacity, Platform, UIManager, Pressable,Button} from 'react-native';
+import {ImageBackground ,View, SafeAreaView, StyleSheet, Text,ScrollView,TouchableOpacity, Platform, UIManager, Pressable,Button, Image} from 'react-native';
 import {AccordionItem} from '../../node_modules/react-native-accordion-list-view';
 import { Entypo } from '../../node_modules/@expo/vector-icons'; 
-import {NavigationContainer, TabActions} from '../../node_modules/@react-navigation/native';
 import {createBottomTabNavigator} from '../../node_modules/@react-navigation/bottom-tabs';
-import { Ionicons } from '../../node_modules/@expo/vector-icons';
-
 
 import HomeScreen from './HomeScreen';
 import IngredientsList from './IngredientsList';
@@ -14,9 +11,7 @@ import IngredientsList from './IngredientsList';
 const homeName = "Home";
 const searchName = "Search";
 
-
-
-const App = () => {
+const App = ({navigation}) => {
   const data = 
     [
       {
@@ -427,80 +422,65 @@ const App = () => {
       }
     ];
 
-    
-  const Tab = createBottomTabNavigator();
-
-    
-
-
   useEffect(() => {
-      if (Platform.OS === 'android') {
-          if (UIManager.setLayoutAnimationEnabledExperimental) {
-              UIManager.setLayoutAnimationEnabledExperimental(true);
-          }
-      }
-  }, []);
-  return (
-      <ImageBackground style = {{
-        resizeMode: 'stretch',}} source={require('../assets/ingreader_theme.png')} >
-      
-  <SafeAreaView>
-    <ScrollView contentContainerStyle={styles.container}>
-      <Pressable>
-          <View style ={styles.box}>
-            <Text style={styles.heading}>Found Ingredients:</Text> 
-          </View> 
-      {data.map(item => (
-          <AccordionItem
-            key={item.id}
-            customTitle={() => <Text style={styles.text}> <Entypo name="leaf" size={24} color="green"/>{item.name.en}</Text>}
-            customBody={() => <> 
-            <Text style={styles.littleText}> The source of {item.name.en} is {item.parents} </Text>
-            <Text style={styles.littleText}> Vegan: {item.vegan ? item.vegan.en : "Undefined"} </Text>
-            <Text style={styles.littleText}> Vegtarian: {item.vegan ? item.vegetarian.en : "Undefined"} </Text>
-            </>
-          }
-            animationDuration={400}
-            isOpen={false}
-            onPress={(isOpen) => console.log(isOpen)}
-          />
-        ))}
-          </Pressable>
-      </ScrollView>
+    if (Platform.OS === 'android') {
+        if (UIManager.setLayoutAnimationEnabledExperimental) {
+            UIManager.setLayoutAnimationEnabledExperimental(true);
+        }
+    }
+}, []);
+return (
+    <ImageBackground style = {{
+      resizeMode: 'stretch',}} source={require('../assets/ingreader_theme.png')} >
+    
+<SafeAreaView>
+  <ScrollView contentContainerStyle={styles.container}>
+    <Pressable>
+        <View style ={styles.box}>
+          <Text style={styles.heading}>Found Ingredients:</Text> 
+        </View> 
+    {data.map(item => (
+        <AccordionItem
+          key={item.id}
+          customTitle={() => <Text style={styles.text}> <Entypo name="leaf" size={24} color="green"/>{item.name.en}</Text>}
+          customBody={() => <> 
+          <Text style={styles.littleText}> The source of {item.name.en} is {item.parents} </Text>
+          <Text style={styles.littleText}> Vegan: {item.vegan ? item.vegan.en : "Undefined"} </Text>
+          <Text style={styles.littleText}> Vegtarian: {item.vegan ? item.vegetarian.en : "Undefined"} </Text>
+          </>
+        }
+          animationDuration={400}
+          isOpen={false}
+          onPress={(isOpen) => console.log(isOpen)}
+        />
+      ))}
+        </Pressable>
+    </ScrollView>
 
-      <NavigationContainer>
-      <Tab.Navigator
-        initialRouteName={homeName}
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
-            let iconName;
-            let rn = route.name;
-
-            if (rn === homeName) {
-              iconName = focused ? 'home' : 'home-outline';
-
-            } else if (rn === searchName) {
-              iconName = focused ? 'search' : 'search';
-
-            } 
-
-            return <Ionicons name={iconName} size={size} color={color} />;
-          },
-        })}
-        tabBarOptions={{
-          activeTintColor: 'green',
-          inactiveTintColor: 'gray',
-          labelStyle: { paddingBottom: 10, fontSize: 10 },
-          style: { padding: 10, height: 70, bottom: 0}
-        }}>
-
-        <Tab.Screen name={homeName} component={HomeScreen} />
-        <Tab.Screen name={searchName} component={IngredientsList} />
-      </Tab.Navigator>
-    </NavigationContainer>
-      
     </SafeAreaView>
     
+    <View
+        style={{
+          position: 'absolute',
+          bottom: 40,
+          flexDirection: 'row',
+          width: '100%',
+          justifyContent: 'space-between',
+          paddingHorizontal: 80,
+        }}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('HomeScreen')}>
+            <Image source={require('../assets/camera.png')} 
+            style={{width: 30, height: 30}}/>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => navigation.navigate('IngredientsList')}>
+            <Image source={require('../assets/magnifyingGlass.png')} 
+            style={{width: 30, height: 30}}/>
+          </TouchableOpacity>
+      </View>
+
   </ImageBackground>
     
   );
@@ -540,4 +520,3 @@ const styles = StyleSheet.create({
     fontSize : 25,
   },
 });
-
