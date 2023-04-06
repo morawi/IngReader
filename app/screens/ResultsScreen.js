@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
 import {ImageBackground ,View, SafeAreaView, StyleSheet, Text,ScrollView,TouchableOpacity, Platform, UIManager, Pressable,Button} from 'react-native';
-import {AccordionItem} from '../node_modules/react-native-accordion-list-view';
-import { Entypo } from '../node_modules/@expo/vector-icons'; 
-import {NavigationContainer, TabActions} from '../node_modules/@react-navigation/native';
-import {createBottomTabNavigator} from '../node_modules/@react-navigation/bottom-tabs';
-import { Ionicons } from '../node_modules/@expo/vector-icons';
+import {AccordionItem} from '../../node_modules/react-native-accordion-list-view';
+import { Entypo } from '../../node_modules/@expo/vector-icons'; 
+import {NavigationContainer, TabActions} from '../../node_modules/@react-navigation/native';
+import {createBottomTabNavigator} from '../../node_modules/@react-navigation/bottom-tabs';
+import { Ionicons } from '../../node_modules/@expo/vector-icons';
 
 
 import HomeScreen from './HomeScreen';

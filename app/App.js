@@ -1,6 +1,6 @@
 const Stack = createNativeStackNavigator();
 import * as React from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer } from "../node_modules/@react-navigation/native";
 import { useFonts } from "expo-font";
 import IngredientsList from "./screens/IngredientsList";
 import ResultsScreen from "./screens/ResultsScreen";
@@ -8,7 +8,7 @@ import LoadingScreen from "./screens/LoadingScreen";
 import HomeScreen from "./screens/HomeScreen";
 import SplashScreen from "./screens/SplashScreen";
 
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createNativeStackNavigator } from "../node_modules/@react-navigation/native-stack";
 import { View, Text, Pressable, TouchableOpacity } from "react-native";
 
 const App = () => {
