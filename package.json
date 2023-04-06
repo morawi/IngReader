@@ -1,0 +1,31 @@
+{
+  "name": "ingreader",
+  "version": "1.0.0",
+  "description": "ingreader app",
+  "main": "app/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/golecl/IngReader.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/golecl/IngReader/issues"
+  },
+  "homepage": "https://github.com/golecl/IngReader#readme",
+  "dependencies": {
+    "@react-navigation/bottom-tabs": "^6.5.7",
+    "@react-navigation/native": "^6.1.6",
+    "@react-navigation/native-stack": "^6.9.12",
+    "expo": "^48.0.10",
+    "expo-image-picker": "~14.1.1",
+    "lodash": "^4.17.21",
+    "native": "^0.3.3",
+    "react-native": "^0.71.6",
+    "react-native-accordion-list-view": "^2.0.1",
+    "undefined": "@react-native\\native"
+  }
+}
