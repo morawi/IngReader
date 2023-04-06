@@ -1,7 +1,7 @@
 const vision = require("@google-cloud/vision");
 const { GoogleAuth, grpc } = require("google-gax");
 
-export default async function (image) {
+export default async function vision(image) {
   const client = new vision.ImageAnnotatorClient();
   
   const request = {
