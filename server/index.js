@@ -12,8 +12,6 @@ export default async function processImage(imageURL){
 
     var text = await scan(imageURL);
 
-    console.log(text);
-
     if ( !text ){
         return 'error';
     }
@@ -21,7 +19,6 @@ export default async function processImage(imageURL){
 
     var parsedTest = await parser(text);
 
-    console.log(parsedTest);
 
     if (parsedTest == null){
         return 'error';
@@ -33,7 +30,7 @@ export default async function processImage(imageURL){
       return 'error';
     }
 
-    var jsonArray = await matcher(parsedTest);
+    var jsonArray = await matcher(seperateByComma);
 
     return jsonArray;
 }
