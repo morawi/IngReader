@@ -1,17 +1,17 @@
 import React, {useEffect} from 'react';
 import {ImageBackground ,View, SafeAreaView, StyleSheet, Text,ScrollView,TouchableOpacity, Platform, UIManager, Pressable,Button} from 'react-native';
-import {AccordionItem} from 'react-native-accordion-list-view';
-import { Entypo } from '@expo/vector-icons'; 
-import {NavigationContainer, TabActions} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import { Ionicons } from '@expo/vector-icons';
+import {AccordionItem} from '../../node_modules/react-native-accordion-list-view';
+import { Entypo } from '../../node_modules/@expo/vector-icons'; 
+import {NavigationContainer, TabActions} from '../../node_modules/@react-navigation/native';
+import {createBottomTabNavigator} from '../../node_modules/@react-navigation/bottom-tabs';
+import { Ionicons } from '../../node_modules/@expo/vector-icons';
 
 
-import HomeScreen from './screens/HomeScreen';
-import IngredientsList from './screens/IngredientsList';
+import HomeScreen from './HomeScreen';
+import IngredientsList from './IngredientsList';
 
 //Screen names
-const homeName = " Home";
+const homeName = "Home";
 const searchName = "Search";
 
 
@@ -442,7 +442,7 @@ const App = () => {
   }, []);
   return (
       <ImageBackground style = {{
-        resizeMode: 'stretch',}} source={require('./assets/ingreader_theme.png')} >
+        resizeMode: 'stretch',}} source={require('../assets/ingreader_theme.png')} >
       
   <SafeAreaView>
     <ScrollView contentContainerStyle={styles.container}>
@@ -489,7 +489,7 @@ const App = () => {
         })}
         tabBarOptions={{
           activeTintColor: 'green',
-          inactiveTintColor: 'grey',
+          inactiveTintColor: 'gray',
           labelStyle: { paddingBottom: 10, fontSize: 10 },
           style: { padding: 10, height: 70, bottom: 0}
         }}>

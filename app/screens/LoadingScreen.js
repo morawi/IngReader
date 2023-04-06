@@ -9,7 +9,7 @@ const LoadingScreen = () => {
   
   
     <View style={styles.loadingscreen}>
-       <Image source = {require('/assets/loadingScreen.gif')} /> 
+       <Image source = {require('../assets/loadingScreen.gif')} /> 
     </View>
   );
 };

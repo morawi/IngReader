@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { KeyboardAvoidingView, Platform, StyleSheet, Text, View, TouchableOpacity, ScrollView, TextInput } from 'react-native';
+import { KeyboardAvoidingView, Platform, StyleSheet, Text, View, TouchableOpacity, ScrollView, TextInput, Image } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import SingleIngredient from "./SingleIngredient";
 
@@ -87,7 +87,6 @@ const IngredientsList = () => {
           </TouchableOpacity>
         ) : null}
       </View>
-
     </View>
 
   );
