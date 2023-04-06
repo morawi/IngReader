@@ -1,16 +1,24 @@
-import express from "express"
 
-const app = express()
-const port = 3000
 
-app.get('/ping', (req, res) => {
-  res.send('pong')
-})
+export default async function processImage(imageURL){
+    var text = await vision(imageURL);
+    if ( text == null ){
+        return error;
+    }
 
-app.get('/proceesImg', (req, res) => {
-  res.send('To be implemented.')
-})
+    var parsedTest = await parser(text);
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+    if (!parsedText){
+        return error;
+    }
+
+    var seperateByComma = parsedTest.split(",").map((item) => item.trim());
+
+    if (seperateByComma.length < 1) {
+      return error;
+    }
+
+    var jsonArray = await matcher(parsedText);
+
+    return jsonArray;
+}
