@@ -1,8 +1,7 @@
-import * as React from "react";
+import React from 'react';
 import { useEffect } from 'react';
-import { Text, StyleSheet, View, Image } from "react-native";
-import { FontSize, FontFamily, Color } from "../GlobalStyles";
-//import background from "/assets/Images/ingreader-logo-1@2x.png";
+import { Text, StyleSheet, View, Image, Dimensions } from 'react-native';
+import { FontSize, FontFamily, Color } from '../GlobalStyles';
 
 const SplashScreen = ({ navigation }) => {
   useEffect(() => {
@@ -12,74 +11,56 @@ const SplashScreen = ({ navigation }) => {
   }, []);
 
   return (
-    
     <View style={styles.splashscreen}>
-     
-      
       <Text style={styles.splashScreen}>IngReader</Text>
-     
-     <View style = {styles.background}>
-    
-    <Image source = {require('../assets/background.png')} />
-    </View> 
-
-    <View style = {styles.logo}>
-    
-    <Image 
-    
-    source = {require('../assets/ReaderLogo.png')} style = {styles.cup} />
-    </View> 
-    
+      <View style={styles.background}>
+        <Image source={require('../assets/background.png')} />
+      </View>
+      <View style={styles.logo}>
+        <Image source={require('../assets/ReaderLogo.png')} style={styles.cup} />
+      </View>
     </View>
-
-    
   );
 };
 
 const styles = StyleSheet.create({
   splashScreen: {
-    position: "absolute",
-    top: 530,
-    //left: 110,
-    left: 90,
-    fontSize: 45,
+    position: 'absolute',
+    top: Dimensions.get('window').height * 0.6,
+    left: Dimensions.get('window').width * 0.33,
+    fontSize: 30,
     fontFamily: FontFamily.aBeeZeeRegular,
-    //color: Color.white,
-    color : "#000000",
-    textAlign: "left",
+    color: Color.black,
+    textAlign: 'left',
   },
   splashscreen: {
-    backgroundColor: "#ffffff",
+    backgroundColor: Color.white,
     flex: 1,
-    width: "100%",
-    height: 800,
-    overflow: "hidden",
+    width: '150%',
+    height: Dimensions.get('window').height,
+    overflow: 'hidden',
   },
   background: {
-    position: "absolute",
-    top: 537.03,
+    position: 'absolute',
+    top: Dimensions.get('window').height * 0.67,
     left: 0,
-    height: 307,
-    width: 390,
+    height: Dimensions.get('window').height * 0.38,
+    width: Dimensions.get('window').width,
     zIndex: 1,
   },
-
-   logo: {
-    position: "absolute",
-    height: 186,
-    width: 140,
-    zIndex: 1,
+  logo: {
+    position: 'absolute',
+    top : Dimensions.get('window').height * 0.5 - (Dimensions.get('window').width * 0.35 * (328/245))/2,
+    left : Dimensions.get('window').width * 0.5 - (Dimensions.get('window').width * 0.35)/2,
+    height : Dimensions.get('window').width * 0.35 * (328/245),
+    width : Dimensions.get('window').width * 0.35,
+    zIndex : 1
   },
   cup: {
-    width : 245,
-    height : 328,
-    top : 200,
-    left : 73,
-    
-  
-
-  }
-
+    width : '100%',
+    height : '100%',
+    resizeMode : 'contain',
+  },
 });
 
 export default SplashScreen;
