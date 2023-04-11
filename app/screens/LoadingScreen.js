@@ -3,9 +3,16 @@ import { View, StyleSheet, Image, Dimensions } from 'react-native';
 
 
 
-const LoadingScreen = (props) => {
+const LoadingScreen = ({ navigation }) => {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigation.navigate('ResultsScreen');
+    }, 3000);
 
-  console.log("loading screen", props.route.params.image);
+    return () => clearTimeout(timer);
+  }, []);
+
+  //console.log("loading screen", props.route.params.image);
 
   return (
 <View style={styles.container}>

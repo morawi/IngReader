@@ -7,6 +7,8 @@ import IngredientsList from "./screens/IngredientsList";
 import LoadingScreen from "./screens/LoadingScreen";
 import HomeScreen from "./screens/HomeScreen";
 import SplashScreen from "./screens/SplashScreen";
+import ResultsScreen from "./screens/ResultsScreen";
+
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -53,6 +55,11 @@ const App = () => {
           <Stack.Screen
             name="IngredientsList"
             component={IngredientsList}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ResultsScreen"
+            component={ResultsScreen}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>
