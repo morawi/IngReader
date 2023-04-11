@@ -109,7 +109,7 @@ export default function CameraScreen({ navigation }) {
     buttonText: {
       fontSize: 20,
       color: 'white',
-      fontFamily: "Lato-Regular",
+      fontFamily: "LatoRegular",
     },
   });
   
