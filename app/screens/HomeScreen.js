@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, TouchableOpacity, Linking, Platform, StyleSheet, Image, ImageBackground } from 'react-native';
+import { Text, View, TouchableOpacity, Linking, Platform, StyleSheet, Image, ImageBackground, Dimensions } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { FontSize, FontFamily, Color } from "../GlobalStyles";
 import BottomNavigationBar from '../components/BottomNavigation';
 
 export default function CameraScreen({ navigation }) {
+  const screenHeight = Dimensions.get('screen').height;
+  const screenWidth = Dimensions.get('screen').width;
+  const verticalSpacing = screenHeight / 12;
+  const horizontalSpacing = screenWidth / 12;
+
   const handleGalleryButtonPress = async () => {
     if (Platform.OS !== "web") {
       const {
@@ -83,12 +88,6 @@ export default function CameraScreen({ navigation }) {
       marginBottom: 20, // Add margin bottom for spacing
       fontFamily: "ABeeZee",
     },
-    rectangle: {
-      width: 100,
-      height: 10,
-      backgroundColor: 'white',
-      marginBottom: 20, // Add margin bottom for spacing
-    },
     buttonCam: {
       width: 250,
       height: 70,
@@ -122,9 +121,9 @@ export default function CameraScreen({ navigation }) {
       <ImageBackground source={require('../assets/ingreader_theme.png')} // Replace with your image source
         style={styles.backgroundImage}
       >
-        <View style={styles.contentContainer}>
+        <View style={[styles.contentContainer, { top: verticalSpacing }]}>
           <Text style={styles.text}>IngReader</Text>
-          <Image source={require('../assets/scan_ingredients_component.png')} />
+          <Image source={require('../assets/scan_ingredients_component.png')} style={{height: verticalSpacing*5}} resizeMode="contain"/>
           <TouchableOpacity style={styles.buttonCam} onPress={handleCameraButtonPress}>
             <Text style={styles.buttonText}>Take Photo</Text>
           </TouchableOpacity>
