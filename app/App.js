@@ -16,6 +16,7 @@ const App = () => {
   const [fontsLoaded, error] = useFonts({
     ABeeZee: require("./assets/fonts/ABeeZee.ttf"),
     ABeeZee_regular: require("./assets/fonts/ABeeZee_regular.ttf"),
+    LatoRegular: require("./assets/fonts/Lato-Regular.ttf"),
   });
 
   if (!fontsLoaded && !error) {
