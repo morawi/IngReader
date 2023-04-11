@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, TouchableOpacity, Linking, Platform, StyleSheet, Image, ImageBackground, Dimensions } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import { FontSize, FontFamily, Color } from "../GlobalStyles";
 import BottomNavigationBar from '../components/BottomNavigation';
 
 export default function CameraScreen({ navigation }) {
   const screenHeight = Dimensions.get('screen').height;
   const screenWidth = Dimensions.get('screen').width;
   const verticalSpacing = screenHeight / 12;
-  const horizontalSpacing = screenWidth / 12;
 
   const handleGalleryButtonPress = async () => {
     if (Platform.OS !== "web") {
@@ -118,7 +116,7 @@ export default function CameraScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <ImageBackground source={require('../assets/ingreader_theme.png')} // Replace with your image source
+      <ImageBackground source={require('../assets/ingreader_theme.png')}
         style={styles.backgroundImage}
       >
         <View style={[styles.contentContainer, { top: verticalSpacing }]}>
