@@ -5,11 +5,9 @@ import { Entypo } from '../../node_modules/@expo/vector-icons';
 import BottomNavigationBar from '../components/BottomNavigation';
 import { BlurView } from 'expo-blur';
 
-//Screen names
-const homeName = "Home";
-const searchName = "Search";
 
-const App = ({ navigation }) => {
+
+const App = () => {
     const data =
         [
             {
@@ -439,12 +437,12 @@ const App = ({ navigation }) => {
                         
                     {data.map(item => (
                         <AccordionItem
-                            key={item.id}
-                            customTitle={() => <Text style={styles.text}> <Entypo name="leaf" size={24} color="green" />{item.name.en}</Text>}
+                            key={item.name.en}
+                            customTitle={() => <Text key = {1} style={styles.text}> <Entypo name="leaf" size={24} color="green" />{item.name.en}</Text>}
                             customBody={() => <>
-                                <Text style={styles.littleText}> The source of {item.name.en} is {item.parents} </Text>
-                                <Text style={styles.littleText}> Vegan: {item.vegan ? item.vegan.en : "Undefined"} </Text>
-                                <Text style={styles.littleText}> Vegtarian: {item.vegan ? item.vegetarian.en : "Undefined"} </Text>
+                                <Text  key = {2} style={styles.littleText}> The Source of {item.name.en} is {item.parents[0].charAt(3).toUpperCase()}{item.parents[0].substring(4)} </Text>
+                                <Text  key = {3} style={styles.littleText}> Vegan: {item.vegan ? item.vegan.en : "Undefined"} </Text>
+                                <Text key = {4} style={styles.littleText}> Vegtarian: {item.vegan ? item.vegetarian.en : "Undefined"} </Text>
                             </>
                             }
                             animationDuration={400}
