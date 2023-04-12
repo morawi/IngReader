@@ -427,9 +427,10 @@ const App = () => {
     }, []);
     return (
         <ImageBackground style={{
-            resizeMode: 'cover', bottom: -30,
+            resizeMode: 'cover', bottom: -30, backgroundColor: "#ffffff",
         }} source={require('../assets/ingreader_theme.png')} >
             <ScrollView contentContainerStyle={styles.container}>
+                <Text style={styles.ingReaderText}>IngReader</Text>
                 <BlurView intensity={80} tint="light" style={[styles.blurContainer, styles.box]}>
                     <Text style={styles.heading}>Found Ingredients:</Text>
                 </BlurView>
@@ -471,12 +472,21 @@ const styles = StyleSheet.create({
         height: '90%',
         display: "flex",
         flexDirection: "column",
-        top: "20%",
+        top: "10%",
 
     },
     text: {
         color: 'green',
         fontSize: 18,
+    },
+    ingReaderText: {
+        fontSize: 30,
+        color: 'black',
+        marginBottom: "20%", 
+        fontFamily: "ABeeZee",
+        marginLeft: "auto",
+        marginRight: "auto",
+
     },
     littleText: {
         textAlign: 'left',
