@@ -1,0 +1,21 @@
+{
+  "expo": {
+    "name": "ingreader",
+    "slug": "ingreader",
+    "version": "1.0.0",
+    "sdkVersion": "47.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "android": {
+      "package": "com.android.ingreader"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "be732a26-a484-4393-a25f-3fe3fc5a7405"
+      }
+    }
+  }
+}

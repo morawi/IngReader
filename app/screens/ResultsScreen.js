@@ -427,14 +427,14 @@ const App = () => {
     }, []);
     return (
         <ImageBackground style={{
-            resizeMode: 'cover', bottom: -30,
+            resizeMode: 'cover', bottom: -30, backgroundColor: "#ffffff",
         }} source={require('../assets/ingreader_theme.png')} >
             <ScrollView contentContainerStyle={styles.container}>
-                <Pressable>
+                <Text style={styles.ingReaderText}>IngReader</Text>
                 <BlurView intensity={80} tint="light" style={[styles.blurContainer, styles.box]}>
                     <Text style={styles.heading}>Found Ingredients:</Text>
                 </BlurView>
-                        
+                <Pressable>
                     {data.map(item => (
                         <AccordionItem
                             key={item.name.en}
@@ -470,11 +470,23 @@ const styles = StyleSheet.create({
         paddingVertical: '2%',
         paddingHorizontal: '3%',
         height: '90%',
-        justifyContent: "center",
+        display: "flex",
+        flexDirection: "column",
+        top: "10%",
+
     },
     text: {
         color: 'green',
         fontSize: 18,
+    },
+    ingReaderText: {
+        fontSize: 30,
+        color: 'black',
+        marginBottom: "20%", 
+        fontFamily: "ABeeZee",
+        marginLeft: "auto",
+        marginRight: "auto",
+
     },
     littleText: {
         textAlign: 'left',
