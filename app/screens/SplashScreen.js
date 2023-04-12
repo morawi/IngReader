@@ -4,11 +4,7 @@ import { Text, StyleSheet, View, Image, Dimensions } from 'react-native';
 import { FontSize, FontFamily, Color } from '../GlobalStyles';
 
 const SplashScreen = ({ navigation }) => {
-  useEffect(() => {
-    setTimeout(() => {
-      navigation.replace('HomeScreen'); // replace splash screen with Home screen after 3 seconds
-    }, 3000);
-  }, []);
+ 
 
   return (
     <View style={styles.splashscreen}>
