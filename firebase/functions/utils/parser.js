@@ -1,7 +1,7 @@
-import { Configuration, OpenAIApi } from "openai";
-import fs from "fs";
+const { Configuration, OpenAIApi } = require("openai");
+var fs = require("fs");
 
-export default async function parser(text) {
+async function parser(text) {
   const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
   });

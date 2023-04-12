@@ -1,7 +1,7 @@
-import vision from "@google-cloud/vision";
-import { GoogleAuth, grpc } from "google-gax";
+const vision = require("@google-cloud/vision");
+const { GoogleAuth, grpc } = require("google-gax");
 
-export default async function scan(image) {
+async function scan(image) {
   const client = new vision.ImageAnnotatorClient(
     {keyFilename: "./static/chrome-sublime-382917-b88a156704b9.json"}
   );
