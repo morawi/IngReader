@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     top: Dimensions.get('window').height * 0.67,
     left: 0,
     height: Dimensions.get('window').height * 0.38,
-    width: Dimensions.get('window').width,
+    width: Dimensions.get('window').width * 1.2,
     zIndex: 1,
   },
   logo: {
