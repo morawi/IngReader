@@ -471,6 +471,10 @@ const styles = StyleSheet.create({
         paddingHorizontal: '3%',
         height: '90%',
         justifyContent: "center",
+        display: "flex",
+        flexDirection: "column",
+        top: "20%",
+
     },
     text: {
         color: 'green',
