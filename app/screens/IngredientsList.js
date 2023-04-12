@@ -2,12 +2,18 @@ import React, { useState } from "react";
 import { KeyboardAvoidingView, Platform, StyleSheet, Text, View, TouchableOpacity, ScrollView, TextInput, Image } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import SingleIngredient from "./SingleIngredient";
+import { useNavigation } from '@react-navigation/native';
 
 const ingredientsListData = require('../static/ingredients.json');
 
 const PAGE_SIZE = 20;
 
 const IngredientsList = () => {
+
+  const navigation = useNavigation();
+  const navigateToScreen = (screenName) => {
+    navigation.navigate(screenName)
+  };
 
   const [currentPage, setCurrentPage] = useState(1);
   const [searchText, setSearchText] = useState("");
@@ -47,8 +53,13 @@ const IngredientsList = () => {
 
   return (
     <View style={styles.container}>
-                  
       <View style={styles.ingredientTitleWrapper}>
+        <TouchableOpacity
+          onPress={() => navigateToScreen('HomeScreen')}>
+          <Image source={require('../assets/backarrow.png')} 
+          style={{width: 30, height: 25}}/>
+        </TouchableOpacity>
+
         <Text style={styles.sectionTitle}>All Ingredients</Text>
         <View style={styles.paginationContainer}>
           <TouchableOpacity onPress={handlePreviousPage} style={currentPage > 1 ? styles.paginationButton : styles.disabledPaginationButton}>
