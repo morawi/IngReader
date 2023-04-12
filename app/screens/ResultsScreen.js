@@ -5,11 +5,9 @@ import { Entypo } from '../../node_modules/@expo/vector-icons';
 import BottomNavigationBar from '../components/BottomNavigation';
 import { BlurView } from 'expo-blur';
 
-//Screen names
-const homeName = "Home";
-const searchName = "Search";
 
-const App = ({ navigation }) => {
+
+const App = () => {
     const data =
         [
             {
@@ -429,22 +427,22 @@ const App = ({ navigation }) => {
     }, []);
     return (
         <ImageBackground style={{
-            resizeMode: 'cover', bottom: -30,
+            resizeMode: 'cover', bottom: -30, backgroundColor: "#ffffff",
         }} source={require('../assets/ingreader_theme.png')} >
             <ScrollView contentContainerStyle={styles.container}>
-                <Pressable>
+                <Text style={styles.ingReaderText}>IngReader</Text>
                 <BlurView intensity={80} tint="light" style={[styles.blurContainer, styles.box]}>
                     <Text style={styles.heading}>Found Ingredients:</Text>
                 </BlurView>
-                        
+                <Pressable>
                     {data.map(item => (
                         <AccordionItem
-                            key={item.id}
-                            customTitle={() => <Text style={styles.text}> <Entypo name="leaf" size={24} color="green" />{item.name.en}</Text>}
+                            key={item.name.en}
+                            customTitle={() => <Text key = {1} style={styles.text}> <Entypo name="leaf" size={24} color="green" />{item.name.en}</Text>}
                             customBody={() => <>
-                                <Text style={styles.littleText}> The source of {item.name.en} is {item.parents} </Text>
-                                <Text style={styles.littleText}> Vegan: {item.vegan ? item.vegan.en : "Undefined"} </Text>
-                                <Text style={styles.littleText}> Vegtarian: {item.vegan ? item.vegetarian.en : "Undefined"} </Text>
+                                <Text  key = {2} style={styles.littleText}> The Source of {item.name.en} is {item.parents[0].charAt(3).toUpperCase()}{item.parents[0].substring(4)} </Text>
+                                <Text  key = {3} style={styles.littleText}> Vegan: {item.vegan ? item.vegan.en : "Undefined"} </Text>
+                                <Text key = {4} style={styles.littleText}> Vegtarian: {item.vegan ? item.vegetarian.en : "Undefined"} </Text>
                             </>
                             }
                             animationDuration={400}
@@ -472,11 +470,23 @@ const styles = StyleSheet.create({
         paddingVertical: '2%',
         paddingHorizontal: '3%',
         height: '90%',
-        justifyContent: "center",
+        display: "flex",
+        flexDirection: "column",
+        top: "10%",
+
     },
     text: {
         color: 'green',
         fontSize: 18,
+    },
+    ingReaderText: {
+        fontSize: 30,
+        color: 'black',
+        marginBottom: "20%", 
+        fontFamily: "ABeeZee",
+        marginLeft: "auto",
+        marginRight: "auto",
+
     },
     littleText: {
         textAlign: 'left',
