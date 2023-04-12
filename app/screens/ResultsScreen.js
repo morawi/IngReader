@@ -430,11 +430,10 @@ const App = () => {
             resizeMode: 'cover', bottom: -30,
         }} source={require('../assets/ingreader_theme.png')} >
             <ScrollView contentContainerStyle={styles.container}>
-                <Pressable>
                 <BlurView intensity={80} tint="light" style={[styles.blurContainer, styles.box]}>
                     <Text style={styles.heading}>Found Ingredients:</Text>
                 </BlurView>
-                        
+                <Pressable>
                     {data.map(item => (
                         <AccordionItem
                             key={item.name.en}
@@ -470,7 +469,6 @@ const styles = StyleSheet.create({
         paddingVertical: '2%',
         paddingHorizontal: '3%',
         height: '90%',
-        justifyContent: "center",
         display: "flex",
         flexDirection: "column",
         top: "20%",
