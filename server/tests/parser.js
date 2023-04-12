@@ -5,6 +5,8 @@ var seconds = new Date().getTime() / 1000;
 console.log(await parser("Ingredients: 1/2 cup of sugar, 1/2 cup of flour"), ["1/2 Cup Of Sugar", "1/2 Cup Of Flour"]);
 console.log(await parser("Ingredients: 1/2 cup of sugar"), ["1/2 Cup Of Sugar"]);
 console.log(await parser("Ingredients: 1/2 cup of sugar, 1/2 cup of flour, 1/2 cup of milk"), ["1/2 Cup Of Sugar", "1/2 Cup Of Flour", "1/2 Cup Of Milk"]);
+console.log(await parser("Ingredients: sugar, salt, vitamin E, Artificial Flavours"), ["sugar", "salt", "vitamin E", "Artificial Flavours"]);
+console.log(await parser("Ingredients: Sugar, Glucose Syrup, Starch, Gelatin, Citric Acid, Permitted Food Colors"), ["Sugar", "Glucose Syrup", "Gelatin", "Citric Acid", "Permitted Food Colors"]);
 
 // complex texts with noise
 
