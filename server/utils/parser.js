@@ -1,7 +1,8 @@
 import { Configuration, OpenAIApi } from "openai";
 import dotenv from 'dotenv';
 import fs from 'fs';
-
+// This code exports an asynchronous function called "parser" that reads a prompt from a file, 
+// calls the OpenAI API with a given text input and returns the response.
 export default async function parser(text) {
   dotenv.config();
 
