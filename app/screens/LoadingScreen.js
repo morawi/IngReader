@@ -1,18 +1,44 @@
+import { useRoute } from '@react-navigation/native';
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Image, Dimensions } from 'react-native';
+import * as FileSystem from 'expo-file-system';
 
+
+const postData = async(str) => {
+  try {
+    console.log('sent');
+    let res = await fetch('https://europe-west1-ingreader-9843a.cloudfunctions.net/procesImage', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        image:str,
+      }),
+    });
+    console.log('got response')
+    res = await res.json();
+    
+    return res.data
+  } catch (e) {
+    console.log(res)
+    console.error(e);
+  }
+}
 
 
 const LoadingScreen = ({ navigation }) => {
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      navigation.navigate('ResultsScreen');
-    }, 3000);
+  
 
-    return () => clearTimeout(timer);
-  }, []);
-
-  //console.log("loading screen", props.route.params.image);
+  const route = useRoute();
+  const base64image = FileSystem.readAsStringAsync(route.params?.image, {encoding: 'base64'}).then(
+    r => {
+      console.log('sending')
+      postData(r).then(a=>{
+        navigation.navigate("ResultsScreen", { result: a });
+      })
+    }
+  )
 
   return (
 <View style={styles.container}>
