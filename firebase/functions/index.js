@@ -1,6 +1,4 @@
 const functions = require("firebase-functions");
-const admin = require("firebase-admin");
-const Firestore = require("@google-cloud/firestore");
 const fs = require("fs");
 const { Configuration, OpenAIApi } = require("openai");
 const vision = require("@google-cloud/vision");
@@ -8,14 +6,13 @@ const { GoogleAuth, grpc } = require("google-gax");
 const Fuse = require("fuse.js");
 const os = require("os");
 
-admin.initializeApp();
-
 let rawdata = fs.readFileSync("./static/ingredients.json", "utf8");
 
 let data = JSON.parse(rawdata);
 let processedData = Object.keys(data).map((key) => data[key]);
 
 exports.procesImage = functions
+  .runWith({timeoutSeconds: 90})
   .region("europe-west1")
   .https.onRequest(async (req, res) => {
     // if image not in request return error
@@ -54,23 +51,22 @@ exports.procesImage = functions
       return;
     }
 
-    
-    var db = admin.firestore();
-
     //console.log("Entered matcher");
 
-    const searchResult = matcher(seperateByComma);
+    const searchResult = await matcher(seperateByComma);
 
-    console.log(searchResult);
+    //console.log(searchResult);
+    //console.log(JSON.stringify(searchResult));
 
-    return res.status(200).send({ error: false, data: (await searchResult).toString() });
+    const JSONRESULTS = JSON.stringify(searchResult);
+
+    return res.status(200).send({ error: false, data: JSONRESULTS });
 
   });
 
   const parser = async(text) => {
-    console.log(process.env.OPENAI_API_KEY);
     const configuration = new Configuration({
-      apiKey: "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",
+      apiKey: process.env.OPENAI_API_KEY,
     });
     const openai = new OpenAIApi(configuration);
   
