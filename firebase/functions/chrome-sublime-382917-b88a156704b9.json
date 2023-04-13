@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "chrome-sublime-382917",
+  "private_key_id": "b88a156704b96eca9ed383a3eb57f38dd6bae123",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC7L3sj6Qb/vfYO\nvxz4ck7qNGaGCcj0NmbBrNeHMxLz91BAg6IjZcl1BnN0DzaOhrGfWSM9TiSeUPCV\nRF2FhrTADpaOSfsycJOX7nb34W1BYcH6cRnzru7SnGr/4tF8clPSfsFltMAI+6bh\nByr2n1CnX+Hn4caU4QQMHkdhrFRICh2isd8ClTd2cVEMXuYULuaePSydV1rZIzM/\ntzfMbHu4IcF4kAKtx88odJHAy506wxMGu9dfJuaimFsutZZZZ5c4ejMPnQi8KZyP\nwYpg6aE+xrYt2RakDCQTiGWFGChX0LwEJrduvLnZum2n7Z1s6NWCmIaJnv+TqAtw\nncymrUZDAgMBAAECggEASX4L5/5++/wWVpXchwNCTpwCQNAosRGG6LW27WM1JspM\nHPhRuXomTacZv1CVyAHETV8PAevjXrFCtChiW6GW5+0SWY1cbeJbYISE+y/r2IbM\nRUsQuGdPZyt4qzzfqO+uT2/q+Matuxkq3SEWUjwcy4pOxN8VO7DZCPT+a6/ga2O4\n8ftrq0ycELbBL0QLaYrIOb6+cWHuUl7nXwZjmB8l0xhMC+wKhyJla8HEkyITgomT\nv3N8sAs2EHtBniw7sJ22algZveI/NcEXzVMEe7M73s9S1+UTYu7YBE+DpFRdpnuz\nxtNb1Nx692Aa93KIGQSI6nMWsz8rtc16l+iwN8046QKBgQDsqfi1wAa0gjWf/6PI\nRO/7I49lzolPJzyZUztE32YQP0I8HbcT4GE8telwsKOSKpxIb/9mrVeWxSq3jpqE\nym8Sj3O8QBSwszqjgm9TQmnEZ7iTFQBr+jWyQTID5lxzMa36jzcwDmkRdXtc24Nr\nvhIr4JEnjcMmF423+Dyo9sJzdQKBgQDKep/5OoPaOWapqEhbXmGicA2xoomjgUwY\nMDhPEbrWTZVb56BJxmrLfnXqFd7kIE7X8z2Jx+hh8gyvLpaO29pzpZFaPzsq+bfj\noKOcWA7JHE8UCC60HW8QayPj4pDoJkWD5YIctbySmDWwr08MK1/7CVmb1EC0MiOx\ntEKdRSYz1wKBgDrTXPDAVGpV20Jz5qAHEqeYBTLHDbZRCG0MFTVfWh07vBj5QeJ8\n6W6PwQCzx1SzprkSrac1+wmM5LtPhPTw5H72jUwDmaD6S98MsuM9JNEe/vAATmSI\ngwRV1DrH7b7sYFRheNRHILKoQwunvJjxW87wOOReBl3XiPBrkZhmDZtpAoGAbmhf\nQu99ZklWibyReAEHDCQ901bl5ppie+4PRk5Mqv6zKuIqrQ/cvAnBElvKpmpXk7m3\nHKI9POtXr06gGlYX0Ge/0o4YHV79vsmhbWc26MLe+/VaQiyqmzFQ6Lpqeawky78i\nK7WNlgIZhLaTS/d65tA6ZJZgkeGlRQkeKdPC+RECgYEAyPLKfMiTegC1wQqpHUQf\nXZhkwgNE2zgGNgaLCEbAAVt8YAU9ub3dcGtzBX1DDsJNoYIa2lHpbU3gN0SXsRSJ\nArMqJfgi195D6BhVjV9H3rbyHPbgiae4D7csumqTQrvmN3jS8yNufQCrHfHakrF9\n7mhM0KtvplwsgBGhcbrBU3c=\n-----END PRIVATE KEY-----\n",
+  "client_email": "ingreader@chrome-sublime-382917.iam.gserviceaccount.com",
+  "client_id": "103155707617503266914",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/ingreader%40chrome-sublime-382917.iam.gserviceaccount.com"
+}

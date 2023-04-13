@@ -8,7 +8,7 @@ import dotenv from "dotenv";
 import fs from "fs";
 
 export default async function processImage(imageURL){
-    dotenv.config()
+    //dotenv.config()
 
     var text = await scan(imageURL);
 

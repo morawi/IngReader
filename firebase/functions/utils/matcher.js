@@ -1,12 +1,12 @@
-import Fuse from "fuse.js";
-import fs from "fs";
+const Fuse = require("fuse.js");
+var fs = require("fs");
 
 let rawdata = fs.readFileSync("./static/ingredients.json", "utf8");
 
 let data = JSON.parse(rawdata);
 let processedData = Object.keys(data).map((key) => data[key]);
 
-export default function matcher(inputs) {
+function matcher(inputs) {
   const options = {
     includeScore: true,
     threshold: 0.15,
