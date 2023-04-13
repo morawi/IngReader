@@ -6,6 +6,7 @@ const { Configuration, OpenAIApi } = require("openai");
 const vision = require("@google-cloud/vision");
 const { GoogleAuth, grpc } = require("google-gax");
 const Fuse = require("fuse.js");
+const os = require("os");
 
 admin.initializeApp();
 
@@ -18,28 +19,35 @@ exports.procesImage = functions
   .region("europe-west1")
   .https.onRequest(async (req, res) => {
     // if image not in request return error
+    console.log("Starting...")
     if (!req.body.image) {
       res.status(400).send({ error: "No image in request body" });
       return;
     }
-
+    
     var text = await scan(req.body.image);
+    
 
     if (text == null || !text) {
       res.status(500).send({ error: "Error scanning image" });
       return;
     }
 
-    console.log(text)
+    //console.log(text)
 
     var parsedTest = await parser(text);
+
+    
 
     if (!parsedTest) {
       res.status(500).send({ error: "Error parsing text" });
       return;
     }
+    //console.log("We have parsed text!\n");
 
     var seperateByComma = parsedTest.split(",").map((item) => item.trim());
+
+    //console.log(seperateByComma);
 
     if (seperateByComma.length < 1) {
       res.status(500).send({ error: "Error finding stuff" });
@@ -49,20 +57,25 @@ exports.procesImage = functions
     
     var db = admin.firestore();
 
+    //console.log("Entered matcher");
+
     const searchResult = matcher(seperateByComma);
 
-    return res.status(200).send({ error: false, data: searchResult });
+    console.log(searchResult);
+
+    return res.status(200).send({ error: false, data: (await searchResult).toString() });
 
   });
 
-  async function parser(text) {
+  const parser = async(text) => {
+    console.log(process.env.OPENAI_API_KEY);
     const configuration = new Configuration({
-      apiKey: process.env.OPENAI_API_KEY,
+      apiKey: "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",
     });
     const openai = new OpenAIApi(configuration);
   
     const prompt = fs.readFileSync("./static/prompt.txt", "utf8");
-  
+    //console.log(prompt)
     const response = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: prompt + text + `\n\nIngredients 3: `,
@@ -72,11 +85,11 @@ exports.procesImage = functions
       frequency_penalty: 0,
       presence_penalty: 0,
     });
-  
+    //return "Filling, High Fructose Corn Syrup, Corn Syrup, Strawberry Puree ConCentrate, Glycerin, Sugar, Modified Corn Starch, Sodium Citrate, Citric Acid, Sodium Alginate, Natural And Artificial Strawberry Flavor, Dicalcium Phosphate, Modified CelLulose, Caramel Color, Malic Acid, Red #40, Enriched Flour, Wheat Flour, Niacinamide, Reduced Iron, Thiamin Mononitrate, Vitamin B1, Riboflavin, Vitamin B2, Folic Acid, Whole Grain Oats, Sugar, Sunflower Oil, High FrucTose Corn Syrup, Contains Two Percent Or Less Of Honey, Calcium Carbonate, Dextrose, Nonfat Dry Milk, Wheat Bran, Salt, Cellulose, Potassium Bicarbonate, Leavening, Natural And Artificial Flavor, Mono- And DiglycerIdes, Propylene Glycol Esters Of Fatty Acids, Soy Lecithin, Wheat Gluten, Cornstarch, Vitamin A Palmitate, Carrageenan, NiacinaMide, Sodium Stearoyl Lactylate, Guar Gum, Zinc Oxide, Reduced Iron, Pyridoxine HydroChloride Vitamin B6, Thiamin HydrochloRide Vitamin B₁, Riboflavin Vitamin B2, Folic Acid";
     return response.data.choices[0].text;
   }
 
-  async function matcher(inputs) {
+  const matcher = async(inputs) => {
     const options = {
       includeScore: true,
       threshold: 0.15,
@@ -100,23 +113,28 @@ exports.procesImage = functions
     return results;
   }
 
-  async function scan(image) {
-    const client = new vision.ImageAnnotatorClient(
-      {keyFilename: "./chrome-sublime-382917-b88a156704b9.json"}
-    );
-    
-    const request = {
-    image: {
-      content: Buffer.from(image, 'base64')
-    }
-    };
+const scan = async (image) => {
+  const path = require("path");
+  const os = require('os');
 
-    const [result] = await client.textDetection(request);
-
-    if (!result.fullTextAnnotation) {
-        return false;
-    }
-
-    return result.fullTextAnnotation.text;
+  const inputImg = Buffer.from(image, "base64");
+  const request = {
+      "image": {"content": inputImg},
+      "features": [{"type": "TEXT_DETECTION"}]
   };
+
+  const imagePath = path.join(os.tmpdir(), "input-img.jpg"); // create path to the new file in the folder called input-img.jpg
+  fs.writeFileSync(imagePath, inputImg);
+
+  const client = new vision.ImageAnnotatorClient(
+    {keyFilename: "./chrome-sublime-382917-b88a156704b9.json"}
+  );
+
+  const [result] = await client.annotateImage(request);
+  if (!result.textAnnotations) {
+    return false;
+  }
+
+  return result.textAnnotations[0].description;
+}
 
