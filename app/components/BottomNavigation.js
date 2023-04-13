@@ -32,6 +32,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 80,
     paddingBottom: 30,
+    position: 'absolute',
+    bottom: 0,
   },
   tabButton: {
     flex: 1,
