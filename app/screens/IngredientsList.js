@@ -52,6 +52,7 @@ const IngredientsList = () => {
   };
 
   return (
+    //IngredientsList component rendering
     <View style={styles.container}>
       <View style={styles.ingredientTitleWrapper}>
         <TouchableOpacity

@@ -1,4 +1,5 @@
 const Stack = createNativeStackNavigator();
+//import required modules
 import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "../node_modules/@react-navigation/native";
 import { useFonts } from "expo-font";
@@ -11,7 +12,7 @@ import ResultsScreen from "./screens/ResultsScreen";
 
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
+//main app content
 const App = () => {
   const [hideSplashScreen, setHideSplashScreen] = React.useState(false);
   const [fontsLoaded, error] = useFonts({
@@ -31,6 +32,7 @@ const App = () => {
   }
 
   return (
+    //main components rendering here
     <NavigationContainer>
       {!hideSplashScreen ? (
         <Stack.Navigator initialRouteName="SplashScreen">

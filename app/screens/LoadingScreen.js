@@ -41,6 +41,7 @@ const LoadingScreen = ({ navigation }) => {
   )
 
   return (
+    //Creating LoadingScreen View
 <View style={styles.container}>
 <Image source={require('../assets/loading.gif')} style={styles.gif} resizeMode="contain" />
 </View>

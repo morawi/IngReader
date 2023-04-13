@@ -7,6 +7,7 @@ const SplashScreen = ({ navigation }) => {
  
 
   return (
+    //rendering SplashScreen view
     <View style={styles.splashscreen}>
       <Text style={styles.splashScreen}>IngReader</Text>
       <View style={styles.background}>

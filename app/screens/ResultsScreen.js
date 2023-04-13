@@ -22,6 +22,7 @@ const App = ({ navigation }) => {
         }
     }, []);
     return (
+        //rendering ResultsScreen view
         <ImageBackground style={{
             resizeMode: 'cover',
             position: 'absolute',

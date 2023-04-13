@@ -115,6 +115,7 @@ export default function CameraScreen({ navigation }) {
   
 
   return (
+    //HomeScreen component
     <View style={styles.container}>
       <ImageBackground source={require('../assets/ingreader_theme.png')}
         style={styles.backgroundImage}

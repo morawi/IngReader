@@ -3,6 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 const SingleIngredient = (props) => {
     return (
+        //rendering SingleIngredient view
         <View style={styles.item}>
             <View style={styles.itemContent}>
                 <Text style={styles.itemNameText}>{props.item.name.en}</Text>
