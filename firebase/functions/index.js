@@ -23,7 +23,7 @@ exports.procesImage = functions
     }
     
     var text = await scan(req.body.image);
-
+    
     if (text == null || !text) {
       res.status(500).send({ error: "Error scanning image" });
       return;
@@ -38,8 +38,6 @@ exports.procesImage = functions
 
     var seperateByComma = parsedTest.split(",").map((item) => item.trim());
 
-    //console.log(seperateByComma);
-
     if (seperateByComma.length < 1) {
       res.status(500).send({ error: "Error finding stuff" });
       return;
@@ -51,52 +49,50 @@ exports.procesImage = functions
 
   });
 
-  // For proper authorship of function, see parser.js in utils folder
-  const parser = async(text) => {
-    const configuration = new Configuration({
-      apiKey: process.env.OPENAI_API_KEY,
-    });
-    const openai = new OpenAIApi(configuration);
-  
-    const prompt = fs.readFileSync("./static/prompt.txt", "utf8");
-    //console.log(prompt)
-    const response = await openai.createCompletion({
-      model: "text-davinci-003",
-      prompt: prompt + text + `\n\nIngredients 3: `,
-      temperature: 0.7,
-      max_tokens: 512,
-      top_p: 1,
-      frequency_penalty: 0,
-      presence_penalty: 0,
-    });
-    //return "Filling, High Fructose Corn Syrup, Corn Syrup, Strawberry Puree ConCentrate, Glycerin, Sugar, Modified Corn Starch, Sodium Citrate, Citric Acid, Sodium Alginate, Natural And Artificial Strawberry Flavor, Dicalcium Phosphate, Modified CelLulose, Caramel Color, Malic Acid, Red #40, Enriched Flour, Wheat Flour, Niacinamide, Reduced Iron, Thiamin Mononitrate, Vitamin B1, Riboflavin, Vitamin B2, Folic Acid, Whole Grain Oats, Sugar, Sunflower Oil, High FrucTose Corn Syrup, Contains Two Percent Or Less Of Honey, Calcium Carbonate, Dextrose, Nonfat Dry Milk, Wheat Bran, Salt, Cellulose, Potassium Bicarbonate, Leavening, Natural And Artificial Flavor, Mono- And DiglycerIdes, Propylene Glycol Esters Of Fatty Acids, Soy Lecithin, Wheat Gluten, Cornstarch, Vitamin A Palmitate, Carrageenan, NiacinaMide, Sodium Stearoyl Lactylate, Guar Gum, Zinc Oxide, Reduced Iron, Pyridoxine HydroChloride Vitamin B6, Thiamin HydrochloRide Vitamin B₁, Riboflavin Vitamin B2, Folic Acid";
-    return response.data.choices[0].text;
-  }
+const parser = async(text) => {
+  const configuration = new Configuration({
+    apiKey: process.env.OPENAI_API_KEY,
+  });
+  const openai = new OpenAIApi(configuration);
+
+  const prompt = fs.readFileSync("./static/prompt.txt", "utf8");
+  //console.log(prompt)
+  const response = await openai.createCompletion({
+    model: "text-davinci-003",
+    prompt: prompt + text + `\n\nIngredients 3: `,
+    temperature: 0.7,
+    max_tokens: 512,
+    top_p: 1,
+    frequency_penalty: 0,
+    presence_penalty: 0,
+  });
+  return response.data.choices[0].text;
+}
 
   // For proper authorship of function, see matcher.js in utils folder
-  const matcher = async(inputs) => {
-    const options = {
-      includeScore: true,
-      threshold: 0.15,
-      keys: [
-        { name: "name", getFn: (item) => Object.values(item.name) },
-        { name: "ciqual_food_name", getFn: (item) => item.ciqual_food_name ? Object.values(item.ciqual_food_name) : []},
-      ],
-    };
-  
-    const fuse = new Fuse(processedData, options);
-  
-    var results = [];
-  
-    inputs.forEach((input) => {
-      var search = fuse.search(input);
-      if (search.length > 0) {
-        results.push(search[0].item);
-      }
-    });
-  
-    return results;
-  }
+const matcher = async(inputs) => {
+  const options = {
+    includeScore: true,
+    threshold: 0.15,
+    keys: [
+      { name: "name", getFn: (item) => Object.values(item.name) },
+      { name: "ciqual_food_name", getFn: (item) => item.ciqual_food_name ? Object.values(item.ciqual_food_name) : []},
+    ],
+  };
+
+  const fuse = new Fuse(processedData, options);
+
+  var results = [];
+
+  inputs.forEach((input) => {
+    var search = fuse.search(input);
+    if (search.length > 0) {
+      results.push(search[0].item);
+    }
+  });
+
+  return results;
+}
 
 // For proper authorship of function, see vision.js in utils folder
 const scan = async (image) => {
