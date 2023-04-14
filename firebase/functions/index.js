@@ -23,24 +23,18 @@ exports.procesImage = functions
     }
     
     var text = await scan(req.body.image);
-    
 
     if (text == null || !text) {
       res.status(500).send({ error: "Error scanning image" });
       return;
     }
 
-    //console.log(text)
-
     var parsedTest = await parser(text);
-
-    
 
     if (!parsedTest) {
       res.status(500).send({ error: "Error parsing text" });
       return;
     }
-    //console.log("We have parsed text!\n");
 
     var seperateByComma = parsedTest.split(",").map((item) => item.trim());
 
@@ -51,19 +45,13 @@ exports.procesImage = functions
       return;
     }
 
-    //console.log("Entered matcher");
-
     const searchResult = await matcher(seperateByComma);
 
-    //console.log(searchResult);
-    //console.log(JSON.stringify(searchResult));
-
-    const JSONRESULTS = JSON.stringify(searchResult);
-
-    return res.status(200).send({ error: false, data: JSONRESULTS });
+    return res.status(200).send({ error: false, data: searchResult });
 
   });
 
+  // For proper authorship of function, see parser.js in utils folder
   const parser = async(text) => {
     const configuration = new Configuration({
       apiKey: process.env.OPENAI_API_KEY,
@@ -85,6 +73,7 @@ exports.procesImage = functions
     return response.data.choices[0].text;
   }
 
+  // For proper authorship of function, see matcher.js in utils folder
   const matcher = async(inputs) => {
     const options = {
       includeScore: true,
@@ -109,6 +98,7 @@ exports.procesImage = functions
     return results;
   }
 
+// For proper authorship of function, see vision.js in utils folder
 const scan = async (image) => {
   const path = require("path");
   const os = require('os');
