@@ -104,11 +104,11 @@ const styles = StyleSheet.create({
     ingReaderText: {
         fontSize: 30,
         color: 'black',
-        marginBottom: "20%",
+        marginBottom: "5%",
         fontFamily: "ABeeZee",
         marginLeft: "auto",
         marginRight: "auto",
-        marginTop: '20%',
+        marginTop: '35%',
 
     },
     littleText: {
