@@ -3,7 +3,7 @@ on: pull_request
 
 jobs:
   update:
-    name: EAS Update
+    name: EAS Preview
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
